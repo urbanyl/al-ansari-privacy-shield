@@ -223,17 +223,24 @@ public sealed class MainViewModel : ObservableObject
 
         if (answer != MessageBoxResult.Yes) return;
 
-        SetStatus("Restoring all original values…");
+        var targets = Settings.Where(_service.HasBackup).ToList();
+        if (targets.Count == 0)
+        {
+            SetStatus("No backup exists yet — there is nothing to restore.");
+            return;
+        }
 
-        var results = await Task.Run(() => Settings.Select(s => _service.Restore(s)).ToList());
+        SetStatus($"Restoring {targets.Count} setting(s)…");
+
+        var results = await Task.Run(() => targets.Select(s => _service.Restore(s)).ToList());
         var failures = results.Count(r => !r.Ok);
 
         RefreshStates(syncDesired: true);
         RefreshBackupInfo();
 
         SetStatus(failures == 0
-            ? "All original values restored."
-            : $"{failures} setting(s) could not be restored (no backup or access denied).",
+            ? $"All original values restored ({targets.Count} setting(s))."
+            : $"{failures} of {targets.Count} setting(s) could not be restored (access denied).",
             failures > 0);
 
         _backup.Log("Restore all requested.");

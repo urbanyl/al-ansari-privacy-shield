@@ -11,6 +11,17 @@ public sealed class PrivacyService
 
     public PrivacyService(BackupStore backup) => _backup = backup;
 
+    public bool HasBackup(PrivacySetting setting)
+    {
+        foreach (var spec in setting.RegistryValues)
+        {
+            if (_backup.HasValue(RegistryBackupKey(spec))) return true;
+        }
+
+        return !string.IsNullOrWhiteSpace(setting.ServiceName) &&
+               _backup.HasValue("svc|" + setting.ServiceName);
+    }
+
     public bool IsApplied(PrivacySetting setting)
     {
         foreach (var spec in setting.RegistryValues)
