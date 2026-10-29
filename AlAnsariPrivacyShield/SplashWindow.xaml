@@ -1,0 +1,77 @@
+<Window x:Class="AlAnsariPrivacyShield.SplashWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Al-Ansari Privacy Shield"
+        Width="520" Height="300"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterScreen"
+        Background="{x:Static SystemColors.ControlBrush}"
+        FontFamily="Segoe UI"
+        FontSize="12">
+
+    <Border BorderBrush="{x:Static SystemColors.ActiveBorderBrush}" BorderThickness="1">
+        <Grid Margin="26,20,26,18">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Viewbox Width="46" Height="46" Stretch="Uniform">
+                    <Grid Width="256" Height="256">
+                        <Rectangle Width="256" Height="256" Fill="#1A2BE8" />
+                        <Path Data="M 128,33 L 223,128 L 128,223 L 33,128 Z"
+                              Stroke="White" StrokeThickness="26.9"
+                              StrokeLineJoin="Miter" Fill="Transparent" />
+                        <Path Data="M 128,98 L 158,128 L 128,158 L 98,128 Z" Fill="White" />
+                    </Grid>
+                </Viewbox>
+                <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="Al-Ansari Privacy Shield" FontSize="15" FontWeight="Bold" />
+                    <TextBlock Text="Reversible Windows privacy hardening"
+                               FontSize="11"
+                               Foreground="{x:Static SystemColors.GrayTextBrush}" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                <TextBlock Text="Windows privacy, under your control."
+                           FontSize="16"
+                           HorizontalAlignment="Center"
+                           Margin="0,6,0,0" />
+                <TextBlock Text="No telemetry, no background service, every change reversible."
+                           FontSize="11"
+                           Foreground="{x:Static SystemColors.GrayTextBrush}"
+                           HorizontalAlignment="Center"
+                           Margin="0,6,0,0" />
+            </StackPanel>
+
+            <ProgressBar x:Name="LoadingBar"
+                         Grid.Row="2"
+                         Height="16"
+                         Minimum="0"
+                         Maximum="100"
+                         Value="0"
+                         Margin="0,10,0,0" />
+
+            <TextBlock x:Name="LoadingText"
+                       Grid.Row="3"
+                       Text="Loading…"
+                       FontSize="11"
+                       Foreground="{x:Static SystemColors.GrayTextBrush}"
+                       Margin="0,8,0,0" />
+
+            <TextBlock Grid.Row="4"
+                       Text="Version 1.0.0"
+                       FontSize="10"
+                       Foreground="{x:Static SystemColors.GrayTextBrush}"
+                       HorizontalAlignment="Right"
+                       Margin="0,10,0,0" />
+        </Grid>
+    </Border>
+</Window>
